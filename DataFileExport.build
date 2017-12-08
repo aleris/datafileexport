@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<Project DefaultTargets="NewRelease" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"> 
+<Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>  
+    <Target Name="Build"> 
+        <Message Text="Building..."/> 
+        <MSBuild Projects="src/TeamNet.Data.FileExport.Solution.sln" Properties="Configuration=Release" /> 
+		<MSBuild Projects="src\Samples\WinFormsExample\WinFormsExample.sln" Properties="Configuration=Release" />
+    </Target> 
+	
+    <Target Name="Tests" DependsOnTargets="Build"> 
+        <Message Text="Running tests..."/> 
+		 <MakeDir Directories="Release" Condition="!Exists('Release')" />
+        <NUnit Assemblies="src\TeamNet.Data.FileExport.Tests\bin\Release\TeamNet.Data.FileExport.Tests.dll " 
+               ContinueOnError="false" 
+               ToolPath="c:\Program Files\NUnit 2.5\bin\net-2.0\"   
+               OutputXmlFile="Release\NUnitResults.xml" /> 
+    </Target> 
+	
+	<Target Name="Src" DependsOnTargets="Tests">
+		<ItemGroup>
+			<SrcFiles Include="src\**\*.cs" />
+			<SrcFiles Include="src\**\*.sln" />
+			<SrcFiles Include="src\**\*.csproj" />
+			<SrcFiles Include="src\**\*.resx" />
+			<SrcFiles Include="src\**\Docs\*.html" />
+			<SrcFiles Include="src\**\Docs\*.txt" />
+			<SrcFiles Include="src\**\Dependencies\*.dll" />
+			<SrcFiles Include="src\**\Dependencies\*.xml" />
+		</ItemGroup>
+	</Target>
+	
+	<Target Name="Bin" DependsOnTargets="Build;Tests">
+		<ItemGroup>
+			<BinFiles Include="src\TeamNet.Data.FileExport\bin\Release\TeamNet.Data.FileExport.dll " />
+			<BinFiles Include="src\TeamNet.Data.FileExport\bin\Release\TeamNet.Data.FileExport.xml " />
+		</ItemGroup>
+	</Target>
+
+	<Target Name="WinFormsExample" DependsOnTargets="Build;Tests">
+		<ItemGroup>
+			<WinFormsExampleFiles Include="src\Samples\WinFormsExample\bin\Release\*.dll" />
+			<WinFormsExampleFiles Include="src\Samples\WinFormsExample\bin\Release\*.exe" />
+		</ItemGroup>
+	</Target>
+	
+	<Target Name="SrcZip" DependsOnTargets="Build;Src">
+		<Copy SourceFiles="@(SrcFiles)" DestinationFolder="Release\DataFileExport-$(Version)-Src\%(RecursiveDir)" />
+		<ItemGroup>
+			<ZipSrcFiles Include="Release\DataFileExport-$(Version)-Src\**\*.*" />
+		</ItemGroup>
+		<Zip Files="@(ZipSrcFiles)"
+			WorkingDirectory="Release" 
+			ZipFileName="Release\DataFileExport-$(Version)-Src.zip"
+			ZipLevel="9" /> 
+	</Target>
+	
+	<Target Name="BinZip" DependsOnTargets="Bin">
+		<Copy SourceFiles="@(BinFiles)" DestinationFolder="Release\DataFileExport-$(Version)-BinOnly\%(RecursiveDir)" />
+		<ItemGroup>
+			<ZipBinFiles Include="Release\DataFileExport-$(Version)-BinOnly\**\*.*" />
+		</ItemGroup>
+		<Zip Files="@(ZipBinFiles)"
+			WorkingDirectory="Release" 
+			ZipFileName="Release\DataFileExport-$(Version)-BinOnly.zip"
+			ZipLevel="9" /> 
+	</Target>
+
+	<Target Name="Doc">
+		<ItemGroup>
+			<DocFiles Include="c:\Program Files\Sandcastle\Examples\TeamNet.Data.FileExport\vs2005\chm\TeamNet.Data.FileExport.chm" />
+		</ItemGroup>
+	</Target>
+	
+	<Target Name="AllZip" DependsOnTargets="Src;Bin;Doc;WinFormsExample">
+		<Copy SourceFiles="@(SrcFiles)" DestinationFolder="Release\DataFileExport-$(Version)\Src\%(RecursiveDir)" />
+		<Copy SourceFiles="@(BinFiles)" DestinationFolder="Release\DataFileExport-$(Version)\Bin\%(RecursiveDir)" />
+		<Copy SourceFiles="@(WinFormsExampleFiles)" DestinationFolder="Release\DataFileExport-$(Version)\Examples\WinForms\%(RecursiveDir)" />
+		<Copy SourceFiles="@(DocFiles)" DestinationFolder="Release\DataFileExport-$(Version)\Doc\%(RecursiveDir)" />
+		<ItemGroup>
+			<ZipAllFiles Include="Release\DataFileExport-$(Version)\Src\**\*.*" />
+			<ZipAllFiles Include="Release\DataFileExport-$(Version)\Bin\**\*.*" />
+			<ZipAllFiles Include="Release\DataFileExport-$(Version)\Doc\**\*.*" />
+			<ZipAllFiles Include="Release\DataFileExport-$(Version)\Examples\**\*.*" />
+		</ItemGroup>
+		<Zip Files="@(ZipAllFiles)"
+			WorkingDirectory="Release" 
+			ZipFileName="Release\DataFileExport-$(Version).zip"
+			ZipLevel="9" /> 
+	</Target>
+	
+	<Target Name="NewRelease" DependsOnTargets="BinZip;AllZip">
+		<RemoveDir Directories="Release\DataFileExport-$(Version)-Src" />
+		<RemoveDir Directories="Release\DataFileExport-$(Version)-BinOnly" />
+		<RemoveDir Directories="Release\DataFileExport-$(Version)" />
+	</Target>
+</Project>

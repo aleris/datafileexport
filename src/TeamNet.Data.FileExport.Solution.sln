@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamNet.Data.FileExport", "TeamNet.Data.FileExport\TeamNet.Data.FileExport.csproj", "{5DC91A01-6519-4A8A-A11D-6CC1F3329A76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamNet.Data.FileExport.Tests", "TeamNet.Data.FileExport.Tests\TeamNet.Data.FileExport.Tests.csproj", "{3325067F-F670-465B-95CF-507834EA0EFE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{A5423433-27FF-4C1D-90DE-38146F089C0E}"
+	ProjectSection(SolutionItems) = preProject
+		Docs\dbf_structure.html = Docs\dbf_structure.html
+		Docs\field_types.txt = Docs\field_types.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs10.codeplex.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = TeamNet.Data.FileExport\\TeamNet.Data.FileExport.csproj
+		SccProjectName1 = TeamNet.Data.FileExport
+		SccLocalPath1 = TeamNet.Data.FileExport
+		SccProjectUniqueName2 = TeamNet.Data.FileExport.Tests\\TeamNet.Data.FileExport.Tests.csproj
+		SccProjectName2 = TeamNet.Data.FileExport.Tests
+		SccLocalPath2 = TeamNet.Data.FileExport.Tests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5DC91A01-6519-4A8A-A11D-6CC1F3329A76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DC91A01-6519-4A8A-A11D-6CC1F3329A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DC91A01-6519-4A8A-A11D-6CC1F3329A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DC91A01-6519-4A8A-A11D-6CC1F3329A76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3325067F-F670-465B-95CF-507834EA0EFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3325067F-F670-465B-95CF-507834EA0EFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3325067F-F670-465B-95CF-507834EA0EFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3325067F-F670-465B-95CF-507834EA0EFE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
