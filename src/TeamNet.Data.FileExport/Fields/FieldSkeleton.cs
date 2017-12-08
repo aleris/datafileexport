@@ -1,6 +1,5 @@
-﻿// (c) Copyright TeamNet International
-// This source is subject to the GPL-2 licence.
-// See http://www.gnu.org/licenses/gpl-2.0.html
+﻿// (c) Copyright Adrian Toșcă
+// This source is subject to the MIT licence.
 // All other rights reserved.
 using System;
 using TeamNet.Data.FileExport.Dbf.Structures;
